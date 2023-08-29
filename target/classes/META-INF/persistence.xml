@@ -7,6 +7,7 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>org.example.Book</class>
+        <class>org.example.Author</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/cdbookstoreDB" />
             <property name="javax.persistence.jdbc.user" value="root" />

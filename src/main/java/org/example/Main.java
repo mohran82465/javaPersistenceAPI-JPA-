@@ -1,24 +1,49 @@
 package org.example;
-
+import org.example.Author;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import java.sql.SQLException;
+
+import static org.example.Language.ARABIC;
+import static org.example.Language.ENFLISH;
+import static org.example.Util.date;
 
 public class Main {
     public static void main(String[] args) throws SQLException,ClassNotFoundException {
-        // Create and persists a book
-        BookService service = new BookService();
-        Book book = service.createBook(4044L,"H2G2","Scifi Book",12.5f,"1234-5678-5678",257);
-        System.out.println("Book persisted : "+ book);
-        // Finds  the book
-        book= service.findBook(4044L);
-        System.out.println("Book found  :  "+ book  );
-        // Raise the price of the book
-        book = service.raiseUnitCost(4044L,12.5f);
-        System.out.println("Book updated : "+book  );
-        // remove the book
-        service.removeBook(4044L);
-        System.out.println("Book Removed");
-        //finds the book
-        book  = service.findBook(4044L);
-        System.out.println("Book Not Found : "  + book  );
+         EntityManagerFactory emf = Persistence.createEntityManagerFactory("Just-learning-jpa");
+         EntityManager em = emf.createEntityManager();
+         EntityTransaction tx = em.getTransaction();
+
+//        AuthorService service = new AuthorService(em );
+//        Author author = new Author("mohamed","mohran", "mohran is known as the best clown in his life ",date("01/09/2000"),23, ENFLISH) ;
+//
+//        // CREATES AND  PERSISTS AND AUTHOR
+//        tx.begin();
+//        author = service.createAuthor(author);
+//        tx.commit();
+//        Long id = author.getId();
+//
+//        System.out.println("Author Persisted : " + author);
+//
+//        // FIND AUTHOR IN THE DB
+//        author= service.findAuthor(id);
+//        System.out.println("Author Found : "+ author );
+//
+//        // REMOVES THE AUTHOR FROM THE DB
+//        tx.begin();
+//        service.removeAuthor(author);
+//        tx.commit();
+//        System.out.println("Author Removed !!! ");
+//
+//        // TRY TO FIND AUTHOR THAT NOT FOUND IN THE DB
+//        author = service.findAuthor(id);
+//        System.out.println("Author Not Found : "+ author);
+
+
+        em.close();
+        emf.close();
+
     }
 }
