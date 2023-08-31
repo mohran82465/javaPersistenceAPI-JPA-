@@ -1,16 +1,26 @@
 package org.example;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
-public class CD {
+@Entity
+public class  CD {
+    @Id
+    @GeneratedValue
     private Long id ;
+    @Column(length = 100)
     private String title ;
+    @Column(length = 3000)
     private String description;
+    @Column(name = "unit_cost")
     private Float unitCost;
+    @Column(name = "total_duration")
     private Float totalDuration;
     private String genre;
+    @OneToMany
+    @JoinColumn(name = "cd_fk")
+    private Set<Musician> musicians = new HashSet<>();
 
     public CD() {
     }
@@ -22,7 +32,6 @@ public class CD {
         this.totalDuration = totalDuration;
         this.genre = genre;
     }
-    @Id @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -30,7 +39,6 @@ public class CD {
     public void setId(Long id) {
         this.id = id;
     }
-    @Column(length = 100)
     public String getTitle() {
         return title;
     }
@@ -38,7 +46,6 @@ public class CD {
     public void setTitle(String title) {
         this.title = title;
     }
-    @Column(length = 3000)
     public String getDescription() {
         return description;
     }
@@ -46,7 +53,6 @@ public class CD {
     public void setDescription(String description) {
         this.description = description;
     }
-    @Column(name = "unit_cost")
     public Float getUnitCost() {
         return unitCost;
     }
@@ -54,7 +60,6 @@ public class CD {
     public void setUnitCost(Float unitCost) {
         this.unitCost = unitCost;
     }
-    @Column(name = "total_duration")
     public Float getTotalDuration() {
         return totalDuration;
     }
@@ -69,5 +74,13 @@ public class CD {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public Set<Musician> getMusicians() {
+        return musicians;
+    }
+
+    public void setMusicians(Set<Musician> musicians) {
+        this.musicians = musicians;
     }
 }
