@@ -1,23 +1,31 @@
 package org.example;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDate;
 
 @Entity
-public class Book {
-    @Id
-    private Long id ;
-    private  String title;
-    private String description;
-    private Float unitCost;
+public class Book extends Item{
+    @Column(length = 15)
     private String isbn;
-    private Integer nbOfPage ;
+
+    @Column(name = "nb_of_pages")
+    private Integer nbOfPage;
+
+    @Column(name = "publication_date")
+    private LocalDate publicationDate;
+
 
     public Book() {
     }
 
     public Book(Long id) {
         this.id = id;
+    }
+    public Book(String title, String isbn) {
+        this.title = title;
+        this.isbn = isbn;
     }
 
     public Book(Long id, String title, String description, Float unitCost, String isbn, Integer nbOfPage) {

@@ -10,7 +10,10 @@ public class CDService {
     }
     public CD createCD(CD cd)
     {
+
         em.persist(cd);
+        for(Musician musician:cd.getMusicians())
+            em.persist(musician);
         return cd ;
     }
     public void removeCD(Long id)

@@ -4,27 +4,24 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.PERSIST;
+
 @Entity
-public class  CD {
-    @Id
-    @GeneratedValue
-    private Long id ;
-    @Column(length = 100)
-    private String title ;
-    @Column(length = 3000)
-    private String description;
-    @Column(name = "unit_cost")
-    private Float unitCost;
+public class  CD extends Item{
     @Column(name = "total_duration")
     private Float totalDuration;
+
     private String genre;
-    @OneToMany
-    @JoinColumn(name = "cd_fk")
+
+    @OneToMany(cascade = PERSIST)
     private Set<Musician> musicians = new HashSet<>();
 
     public CD() {
     }
-
+    public CD(String title, String genre) {
+        this.title = title;
+        this.genre = genre;
+    }
     public CD(String title, String description, Float unitCost, Float totalDuration, String genre) {
         this.title = title;
         this.description = description;
@@ -32,6 +29,11 @@ public class  CD {
         this.totalDuration = totalDuration;
         this.genre = genre;
     }
+
+    public CD(String title) {
+        this.title= title;
+    }
+
     public Long getId() {
         return id;
     }
